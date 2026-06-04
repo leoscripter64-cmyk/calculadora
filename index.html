@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de Medias</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.container {
+  max-width: 450px;
+  margin: 60px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.input-box {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #667eea;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #5a67d8;
+}
+
+.nota {
+  display: inline-block;
+  background: #eee;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>📊 Calculadora de Medias</h1>
+
+  <div class="input-box">
+    <input type="number" id="nota" placeholder="Nota (0-10)">
+    <button onclick="añadir()">➕</button>
+  </div>
+
+  <div id="lista"></div>
+
+  <button onclick="calcular()">📊 Calcular media</button>
+
+  <h2 id="resultado"></h2>
+</div>
+
+<script>
+let notas = [];
+
+function añadir() {
+  let v = parseFloat(document.getElementById("nota").value);
+
+  if (!isNaN(v)) {
+    notas.push(v);
+
+    let span = document.createElement("span");
+    span.className = "nota";
+    span.innerHTML = v;
+
+    document.getElementById("lista").appendChild(span);
+  }
+
+  document.getElementById("nota").value = "";
+}
+
+function calcular() {
+  if (notas.length === 0) return;
+
+  let suma = 0;
+
+  for (let i = 0; i < notas.length; i++) {
+    suma += notas[i];
+  }
+
+  let media = suma / notas.length;
+
+  document.getElementById("resultado").innerHTML =
+    "📊 Media: " + media.toFixed(2);
+}
+</script>
+
+</body>
+</html>
